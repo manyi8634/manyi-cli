@@ -1,0 +1,25 @@
+{
+  "name": "manyi-cli",
+  "version": "0.0.1-alpha",
+  "description": "A cli tool for front end",
+  "main": "index.js",
+  "keywords": [
+    "zhangmanyi",
+    "manyi",
+    "cli",
+    "manyi-cli"
+  ],
+  "author": "zhangmanyi",
+  "license": "MIT",
+  "bin": {
+    "manyi": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^11.0.0",
+    "download-git-repo": "^3.0.2",
+    "handlebars": "^4.7.7",
+    "inquirer": "^8.0.0",
+    "ora": "^3.4.0"
+  }
+}
