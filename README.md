@@ -6,17 +6,21 @@
 npm i manyi-cli -g / yarn add manyi-cli -g / ...
 ```
 ## 使用说明
-
-> manyi vue                     创建vue模板项目
-
-> manyi react                   创建react模板项
-
-> manyi list                    查看所有可用模板
-
-> manyi -V / manyi --version    查看当前脚手架版本
-
-> manyi -h / manyi              查看帮助
-
+```
+manyi vue                     创建vue模板项目
+```
+```
+manyi react                   创建react模板项
+```
+```
+manyi list                    查看所有可用模板
+```
+```
+manyi -V / manyi --version    查看当前脚手架版本
+```
+```
+manyi -h / manyi              查看帮助
+```
 
 
 

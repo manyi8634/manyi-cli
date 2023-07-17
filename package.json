@@ -14,6 +14,15 @@
   "bin": {
     "manyi": "index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manyi8634/manyi-cli.git"
+  },
+  "files": [
+    "index.js",
+    "templates.js"
+  ],
+  "homepage": "https://manyi8634.github.io/doc/manyi-cli",
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^11.0.0",
