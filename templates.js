@@ -1,12 +1,12 @@
 module.exports = {
-  'tpl-a': {
-    url: 'https://github.com/manyi8634/tpl-a',
-    downloadUrl: 'http://github.com:manyi8634/tpl-a#main',
-    description: 'vue admin template'
+  'vue': {
+    url: 'https://gitee.com/manyi863412757/manyi-cli-vue-admin',
+    downloadUrl: 'https://gitee.com:manyi863412757/manyi-cli-vue-admin#master',
+    description: 'vue模板项目'
   },
-  'tpl-b': {
-    url: 'https://github.com/manyi8634/tpl-b',
-    downloadUrl: 'http://github.com:manyi8634/tpl-b#main',
-    description: 'React admin template'
+  'react': {
+    url: 'https://gitee.com/manyi863412757/manyi-cli-react-admin',
+    downloadUrl: 'https://gitee.com:manyi863412757/manyi-cli-react-admin#master',
+    description: 'react模板项目'
   }
 }

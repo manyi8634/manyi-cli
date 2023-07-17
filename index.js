@@ -8,57 +8,69 @@ const ora = require('ora')
 const chalk = require('chalk')
 const logSymbols = require('log-symbols')
 const templates = require('./templates')
+const version = require('./package.json').version
 
 program
-  .version('0.0.1-alpha') // -v 或者 --version 的时候会输出该版本号
+  .version(version) // -v 或者 --version 的时候会输出该版本号
 
 program
-  .command('init <template-name> [project-name]')
-  .description('初始化项目模板')
-  .action((templateName, projectName) => {
-    console.log(templateName, projectName)
-    // loading 提示
-    const spinner = ora('正在下载模板...').start()
+  .command('vue')
+  .description('创建vue项目模板')
+  .action(() => {
+    inquirer.prompt([{
+      type: 'input',
+      name: 'name',
+      message: '请输入项目名称',
+      default: 'manyi-vue-admin'
+    }]).then((res)=>{
+      const spinner = ora('正在下载模板...').start()
+      const { downloadUrl } = templates.vue
+      download(downloadUrl, res.name, { clone: true }, (err) => {
+        if (err) {
+          spinner.fail()
+          console.log(logSymbols.error, chalk.red(err))
+          return
+        }
+        spinner.succeed()
 
-    // download
-    //    第一个参数：仓库地址
-    //    第二个参数：下载路径
-    const { downloadUrl } = templates[templateName]
-    download(downloadUrl, projectName, { clone: true }, (err) => {
-      if (err) {
-        spinner.fail()
-        console.log(logSymbols.error, chalk.red(err))
-        return
-      }
-
-      spinner.succeed()
-
-      // 使用向导的方式采集用户输入的值
-      inquirer.prompt([{
-        type: 'input',
-        name: 'name',
-        message: '请输入项目名称',
-        default: projectName
-      }, {
-        type: 'input',
-        name: 'description',
-        message: '请输入项目简介'
-      }, {
-        type: 'input',
-        name: 'author',
-        message: '请输入作者名称'
-      }]).then((answers) => {
-        // 把项目下的 package.json 文件读取出来
-        const packagePath = `${projectName}/package.json`
+        const packagePath = `${res.name}/package.json`
         const packageContent = fs.readFileSync(packagePath, 'utf8')
-
         // 使用模板引擎把用户输入的数据解析到 package.json 文件中
-        const packageResult = handlebars.compile(packageContent)(answers)
-
+        const packageResult = handlebars.compile(packageContent)(res)
         // 解析完毕，把解析之后的结果重新写入 package.json 文件中
         fs.writeFileSync(packagePath, packageResult)
+        console.log(logSymbols.success, chalk.green('vue模板项目创建成功'))
+      })
+    })
+  })
 
-        console.log(logSymbols.success, chalk.yellow('初始化模板成功'))
+program
+  .command('react')
+  .description('创建react项目模板')
+  .action(() => {
+    inquirer.prompt([{
+      type: 'input',
+      name: 'name',
+      message: '请输入项目名称',
+      default: 'manyi-react-admin'
+    }]).then((res)=>{
+      const spinner = ora('正在下载模板...').start()
+      const { downloadUrl } = templates.react
+      download(downloadUrl, res.name, { clone: true }, (err) => {
+        if (err) {
+          spinner.fail()
+          console.log(logSymbols.error, chalk.red(err))
+          return
+        }
+        spinner.succeed()
+
+        const packagePath = `${res.name}/package.json`
+        const packageContent = fs.readFileSync(packagePath, 'utf8')
+        // 使用模板引擎把用户输入的数据解析到 package.json 文件中
+        const packageResult = handlebars.compile(packageContent)(res)
+        // 解析完毕，把解析之后的结果重新写入 package.json 文件中
+        fs.writeFileSync(packagePath, packageResult)
+        console.log(logSymbols.success, chalk.green('react模板项目创建成功'))
       })
     })
   })
