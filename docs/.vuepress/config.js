@@ -11,7 +11,7 @@ module.exports = {
     nav: [
       { text: '指南', link: '/guide/introduce' },
       { text: '命令参考', link: '/config/api' },
-      { text: 'Gihub', link: 'https://github.com/manyi8634/manyi-cli' },
+      { text: 'Github', link: 'https://github.com/manyi8634/manyi-cli' },
     ],
     sidebar: {
       '/guide/': [
