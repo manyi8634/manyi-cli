@@ -23,6 +23,13 @@
     "templates.js"
   ],
   "homepage": "https://manyi8634.github.io/doc/manyi-cli",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^11.0.0",
@@ -31,7 +38,7 @@
     "inquirer": "^8.0.0",
     "ora": "^3.4.0"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "devDependencies": {
+    "vuepress": "^1.9.9"
   }
 }
