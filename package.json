@@ -1,6 +1,6 @@
 {
   "name": "manyi-cli",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "A cli tool for front end",
   "main": "index.js",
   "keywords": [
@@ -36,9 +36,13 @@
     "download-git-repo": "^3.0.2",
     "handlebars": "^4.7.7",
     "inquirer": "^8.0.0",
-    "ora": "^3.4.0"
+    "ora": "^3.4.0",
+    "semver": "^7.5.4"
   },
   "devDependencies": {
     "vuepress": "^1.9.9"
+  },
+  "engines": {
+    "node": "^14.0.0 || >= 16.0.0"
   }
 }

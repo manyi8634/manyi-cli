@@ -9,6 +9,20 @@ const chalk = require('chalk')
 const logSymbols = require('log-symbols')
 const templates = require('./templates')
 const version = require('./package.json').version
+const requiredVersion = require('./package.json').engines.node
+const semver = require('semver')
+
+function checkNodeVersion (wanted, id) {
+  if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
+    console.log(chalk.red(
+      'OMG你的node版本为' + process.version + ',这个有点低了哈！' + id +
+      '需要使用的版本为' + wanted + '.\n赶快去更新node版本吧~'
+    ))
+    process.exit(1)
+  }
+}
+
+checkNodeVersion(requiredVersion, 'manyi-cli')
 
 program
   .version(version) // -v 或者 --version 的时候会输出该版本号
@@ -29,6 +43,7 @@ program
         if (err) {
           spinner.fail()
           console.log(logSymbols.error, chalk.red(err))
+          console.log(chalk.red('OMG发生异常了...请检查: 1.网络是否正常? 2.项目名称是否合法?'))
           return
         }
         spinner.succeed()
@@ -39,7 +54,7 @@ program
         const packageResult = handlebars.compile(packageContent)(res)
         // 解析完毕，把解析之后的结果重新写入 package.json 文件中
         fs.writeFileSync(packagePath, packageResult)
-        console.log(logSymbols.success, chalk.green('vue模板项目创建成功'))
+        console.log(logSymbols.success, chalk.green('vue项目创建成功，赶快去体验吧~'))
       })
     })
   })
@@ -60,6 +75,7 @@ program
         if (err) {
           spinner.fail()
           console.log(logSymbols.error, chalk.red(err))
+          console.log(chalk.red('OMG发生异常了...请检查: 1.网络是否正常? 2.项目名称是否合法?'))
           return
         }
         spinner.succeed()
@@ -70,7 +86,7 @@ program
         const packageResult = handlebars.compile(packageContent)(res)
         // 解析完毕，把解析之后的结果重新写入 package.json 文件中
         fs.writeFileSync(packagePath, packageResult)
-        console.log(logSymbols.success, chalk.green('react模板项目创建成功'))
+        console.log(logSymbols.success, chalk.green('react项目创建成功，赶快去体验吧~'))
       })
     })
   })
