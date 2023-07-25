@@ -12,18 +12,6 @@ const version = require('./package.json').version
 const requiredVersion = require('./package.json').engines.node
 const semver = require('semver')
 
-function checkNodeVersion (wanted, id) {
-  if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
-    console.log(chalk.red(
-      'OMG你的node版本为' + process.version + ',这个有点低了哈！' + id +
-      '需要使用的版本为' + wanted + '.\n赶快去更新node版本吧~'
-    ))
-    process.exit(1)
-  }
-}
-
-checkNodeVersion(requiredVersion, 'manyi-cli')
-
 program
   .version(version) // -v 或者 --version 的时候会输出该版本号
 
@@ -55,6 +43,12 @@ program
         // 解析完毕，把解析之后的结果重新写入 package.json 文件中
         fs.writeFileSync(packagePath, packageResult)
         console.log(logSymbols.success, chalk.green('vue项目创建成功，赶快去体验吧~'))
+        if (!semver.satisfies(process.version, ">=14.0.0", { includePrerelease: true })) {
+          console.log(chalk.yellow(
+            '警告：OMG,虽然已为你成功创建vue项目，但是检测到你的node版本为' + process.version + ',这个有点低了哈！\n当前创建的vue项目需要使用的版本为14+，赶快去更新node版本，然后再盘这个项目吧~'
+          ))
+          process.exit(1)
+        }
       })
     })
   })
@@ -75,7 +69,7 @@ program
         if (err) {
           spinner.fail()
           console.log(logSymbols.error, chalk.red(err))
-          console.log(chalk.red('OMG发生异常了...请检查: 1.网络是否正常? 2.项目名称是否合法?'))
+          console.log(chalk.red('OMG，发生异常了...请检查: 1.网络是否正常? 2.项目名称是否合法?'))
           return
         }
         spinner.succeed()
@@ -87,6 +81,13 @@ program
         // 解析完毕，把解析之后的结果重新写入 package.json 文件中
         fs.writeFileSync(packagePath, packageResult)
         console.log(logSymbols.success, chalk.green('react项目创建成功，赶快去体验吧~'))
+
+        if (!semver.satisfies(process.version, ">=16.0.0", { includePrerelease: true })) {
+          console.log(chalk.yellow(
+            '警告：OMG,虽然已为你成功创建react项目，但是检测到你的node版本为' + process.version + ',这个有点低了哈！\n当前创建的react项目需要使用的版本为16+，赶快去更新node版本，然后再盘这个项目吧~'
+          ))
+          process.exit(1)
+        }
       })
     })
   })
